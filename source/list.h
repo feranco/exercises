@@ -12,5 +12,5 @@ struct Node {
 typedef Node* Link;
 void removeDuplicate (Link head);
 Link findKtoLast(Link head, int k);
-
 int findKtoLastRec(Link head, Link& kToLast, int k);
+void partition(Link& head, Item v);

@@ -59,3 +59,25 @@ int findKtoLastRec(Link head, Link& kToLast, int k) {
 
   return tmp;
 }
+
+void partition(Link& head, Item v) {
+	Node headA(0, 0);
+	Node headB(0, 0);
+	Link a = &headA;
+	Link b = &headB;
+
+	for (Link t = head; t != 0; t = t->next) {
+		if (t->item < v) {
+			a->next = t;
+			a = a->next;
+		}
+		else {
+			b->next = t;
+			b = b->next;
+		}
+	}
+
+	a->next = headB.next;
+	b->next = 0;
+	head = headA.next;
+}

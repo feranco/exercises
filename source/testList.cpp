@@ -71,3 +71,30 @@ void testFindKToLastRec(int n, int k) {
     std::cout << "less than k elements!" << std::endl;
   }		
 }
+
+void testPartition(int n) {
+	srand(time(0));
+	Link list = new Node(rand() % 1000, 0);
+	Link tmp = list;
+
+	for (int i = 0; i < n; ++i) {
+		tmp->next = new Node(rand() % 1000, 0);
+		tmp = tmp->next;
+	}
+
+	for (tmp = list; tmp != 0; tmp = tmp->next) {
+		std::cout << tmp->item << " ";
+	}
+	std::cout << std::endl;
+
+	int v = rand() % 1000;
+
+	partition(list, v);
+
+	std::cout << v << std::endl;
+
+	for (tmp = list; tmp != 0; tmp = tmp->next) {
+		std::cout << tmp->item << " ";
+	}
+	std::cout << std::endl;
+}
