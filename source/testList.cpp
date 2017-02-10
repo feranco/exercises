@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
+#include <string>
 
 void testRemoveduplicate(int n) {
   srand(time(0));
@@ -15,17 +16,9 @@ void testRemoveduplicate(int n) {
     tmp = tmp->next;
   }
 
-  for (Link t = head->next; t != 0; t = t->next) {
-    std::cout << t->item << " ";
-  }
-  std::cout << std::endl;
-
+  dumpList(head->next);
   removeDuplicate(head->next);
-
-  for (Link t = head->next; t != 0; t = t->next) {
-    std::cout << t->item << " ";
-  }
-  std::cout << std::endl;
+  dumpList(head->next);
 }
 
 void testFindKtoLast(int n, int k) {
@@ -38,8 +31,7 @@ void testFindKtoLast(int n, int k) {
     tmp = tmp->next;
   }
 
-  for (tmp = head->next; tmp != 0; tmp = tmp->next) std::cout << tmp->item << " ";
-  std::cout << std::endl;
+  dumpList(head->next);
   tmp = findKtoLast(head->next, k);
   if (tmp) {
     std::cout << "k to last: " << tmp->item << std::endl;
@@ -59,8 +51,7 @@ void testFindKToLastRec(int n, int k) {
     tmp = tmp->next;
   }
 
-  for (tmp = head->next; tmp != 0; tmp = tmp->next) std::cout << tmp->item << " ";
-  std::cout << std::endl;
+  dumpList(head->next);
   Link pippo = new Node (34,0);
   findKtoLastRec(head->next, pippo, k);
   
@@ -73,28 +64,49 @@ void testFindKToLastRec(int n, int k) {
 }
 
 void testPartition(int n) {
-	srand(time(0));
-	Link list = new Node(rand() % 1000, 0);
-	Link tmp = list;
+  srand(time(0));
+  Link list = new Node(rand() % 1000, 0);
+  Link tmp = list;
 
-	for (int i = 0; i < n; ++i) {
-		tmp->next = new Node(rand() % 1000, 0);
-		tmp = tmp->next;
-	}
+  for (int i = 0; i < n; ++i) {
+    tmp->next = new Node(rand() % 1000, 0);
+    tmp = tmp->next;
+  }
+  //before partition
+  dumpList(list);
 
-	for (tmp = list; tmp != 0; tmp = tmp->next) {
-		std::cout << tmp->item << " ";
-	}
-	std::cout << std::endl;
+  int v = rand() % 1000;
+  partition(list, v);
+  
+  std::cout << "Partition around " << v << std::endl;
+  //after partition
+  dumpList(list);
+}
 
-	int v = rand() % 1000;
+void testSumLists(void) {
+  std::string s1, s2;
+  Link op1, op2, sum;
+  op1 = op2 = 0;
+  std::cout << "Insert operators: " << std::endl;
+  std::cin >> s1 >> s2;
 
-	partition(list, v);
+  for (std::string::iterator it = s1.begin(); it < s1.end(); ++it) addInFront(op1, *it-'0');
+  for (std::string::iterator it = s2.begin(); it < s2.end(); ++it) addInFront(op2, *it-'0');
 
-	std::cout << v << std::endl;
+  sum = sumLists(op1, op2);
+  dumpList(sum);
+}
 
-	for (tmp = list; tmp != 0; tmp = tmp->next) {
-		std::cout << tmp->item << " ";
-	}
-	std::cout << std::endl;
+void testSumListsReverse(void) {
+  std::string s1, s2;
+  Link op1, op2, sum;
+  op1 = op2 = 0;
+  std::cout << "Insert operators: " << std::endl;
+  std::cin >> s1 >> s2;
+
+  for (std::string::reverse_iterator it = s1.rbegin(); it < s1.rend(); ++it) addInFront(op1, *it-'0');
+  for (std::string::reverse_iterator it = s2.rbegin(); it < s2.rend(); ++it) addInFront(op2, *it-'0');
+
+  sum = sumListsReverse(op1, op2);
+  dumpList(sum);
 }
