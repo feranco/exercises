@@ -15,13 +15,13 @@ void dumpList(Link list) {
 }
 
 int lenght(Link list) {
-  int len;
+  int len = 0;
   for (Link t = list; t != 0; t = t->next) ++len;
   return len;
 }
 
 void padInFront(Link list, Item p, int len) {
-  for int i = 0; i < len; ++i) addInFront(list,p);
+  for (int i = 0; i < len; ++i) addInFront(list,p);
 }
 
 void removeDuplicate (Link head) {
@@ -143,10 +143,12 @@ Link sumListsReverse(Link op1, Link op2) {
 
   int len1 = lenght(op1);
   int len2 = lenght(op2);
+  int co;
   
   if(len1 < len2) padInFront(op1, 0, len2-len1);
   if(len2 < len1) padInFront(op2, 0, len1-len2);
-  Link sumListsReverseRec(op1, op2);
+  Link sum = sumListsReverseRec(op1, op2, co);
+  return sum;
 }
 
 Link sumListsReverseRec(Link op1, Link op2, int& co) {
