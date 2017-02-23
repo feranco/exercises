@@ -170,8 +170,8 @@ int countDigits(int num) {
   return digits;
 }
 
-int compressSize (char* str) {
-  char* e = str;
+int compressSize (const char* str) {
+  const char* e = str;
   int block_sz, sz;
   block_sz = sz = 0;
   while (*str != 0) {
@@ -191,10 +191,11 @@ int compressSize (char* str) {
 //s: ptr to first char of a block
 //e: ptr to first char of the next block
 char* compressCString(const char* str, int str_len) {
-  char *w, *s, *e;
+  const char *s, *e;
+  char *w;
   int cpr_len = compressSize(str);
   
-  if (cpr_len >= str_len) return str;
+  if (cpr_len >= str_len) return const_cast<char*>(str);
   
   char* cpr = new char[cpr_len+1];
   	
