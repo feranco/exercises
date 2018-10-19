@@ -1,0 +1,23 @@
+#include <fstream>
+#include <random>
+
+int main (int argc, char* argv[]) {
+
+  unsigned int readings = 50;
+  if (argc > 1) readings = atoi(argv[1]);
+
+  unsigned int hours = 0;
+  std::random_device rd{};
+  std::uniform_distribution<double>{65,70};
+  std::random_engine e{rd};
+
+  std::ofstream outputFile{"raw_temps.cpp", ios::trunc};
+
+  if (!outputFile) throe runtime_exception("cannot open output file " + outputFile + "\n");
+  
+  for (; readings > 0; --readings) {
+    
+  }
+  
+  
+}
